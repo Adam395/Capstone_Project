@@ -6,7 +6,7 @@ Steam is the largest video game digital distribution platform in the world, with
   
 Steam user reviews carry the most weight on the site. They are the first review shown, in a search they get their own unique icon, and only the user score is shwon in the thumbnail preview on Steam's front page. Because of the weight given to User Reviews, a game's sales can be made or broken by the score given to it.  
   
-We at Catalyst Consulting, as part of our full-spectrum services to developers and publishers, want to provide prediction services for user reviews. Based on a game's metacritic scores, an aggregate value of professional reviewers' opinions, we will predict Steam user scores, allowing developers to appropriately budget for advertising and predict revenue models.  
+We at Catalyst Consulting, as part of our full-spectrum services to developers and publishers, want to provide prediction services using a regression model for user reviews. Based on a game's metacritic scores, an aggregate value of professional reviewers' opinions, we will predict Steam user scores, allowing developers to appropriately budget for advertising and predict revenue models. Our measure of accuracy will be R2 score.  
   
 We will not be trying to account for scandal though: an otherwise excellent game with a high Metacritic score can have a terrible User Review score due to game scandals, as users "review bomb" the user score section with negative reviews and rants about the developer.
 
