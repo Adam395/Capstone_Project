@@ -1,52 +1,70 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project 3: Datascraping and Modelling Subreddits
+# Cave Johnson Approved: Prediction of Steam User Reviews from Metacritic Data  
+**DSI-11 Capstone Project - Adam Cohen**
 
 ### Problem Statement:
 
 Steam is the largest video game digital distribution platform in the world, with a 75% market share. Games on the platform are ranked by "meta-scores," a numerical value based on the review score from Metacritic, a curator score based on Steam's trusted reviewers, and a "user score," which holds the most weight, based on user reviews.  
   
-Steam user reviews carry the most weight on the site. They are the first review shown, in a search they get their own unique icon, and only the user score is shwon in the thumbnail preview on Steam's front page. Because of the weight given to User Reviews, a game's sales can be made or broken by the score given to it.  
+Steam user reviews carry the most weight on the site. They are the first review shown, in a search they get their own unique icon, and only the user score is shown in the thumbnail preview on Steam's front page. Because of the weight given to User Reviews, a game's sales can be made or broken by the score given to it.  
   
-We at Catalyst Consulting, as part of our full-spectrum services to developers and publishers, want to provide prediction services using a regression model for user reviews. Based on a game's metacritic scores, an aggregate value of professional reviewers' opinions, we will predict Steam user scores, allowing developers to appropriately budget for advertising and predict revenue models. Our measure of accuracy will be R2 score.  
+We at Catalyst Consulting, as part of our full-spectrum services to developers and publishers, want to provide prediction services using a regression model for user reviews. Based on a game's metacritic scores, an aggregate value of professional reviewers' opinions, we will predict Steam user scores, allowing developers to appropriately budget for advertising and predict revenue models. Our measure of accuracy will be RMSE value.  
   
 We will not be trying to account for scandal though: an otherwise excellent game with a high Metacritic score can have a terrible User Review score due to game scandals, as users "review bomb" the user score section with negative reviews and rants about the developer.
 
 ### Executive Summary:
-
+I used two pre-existing datasets from Kaggle.com as the basis of my study: one consisting of Steam User behaviors, and one consisting of Metacritic review data. I additionally conducted an informal study of Steam reviewers, and manually imputed Steam review data into a .csv, to create a dataset composed of Metacritic review data, average playtime for games, and the Steam review scores. We then split this data into a training and holdout set, dividing on whether or not the game was listed on Steam's storefront.  
+  
+My parameter of interest was the "Review Percent Score" metric, which I used regression models to try to predict based on the metacritic review data and average playtime for the game, and assessed on Root Mean Squared Error, or RMSE, value. Our most successful model was a Linear Regression model, which had an RMSE of 10.47, or a prediction spread of just under 21 percentage points.  
+  
+Overall, I would not consider my model a successful tool for real-world deployment. 10 points is a very large value when it comes to reviews. However, in analyzing the data after predicting on the holdout set, we found that User Review Score wasn't a good barometer of whether or not a game would be a commercial success. There were many games that were "blockbuster" titles, but which were ranked below smaller-scale games.
 
 
 ### Table of Contents
-[Problem Statement](#Problem-Statement)  
+## 3.0 Table of Contents
+[1.0 - Problem Statement](#1.0-Problem-Statement)  
   
-[Executive Summary](#Executive-Summary)  
+[2.0 - Executive Summary](#2.0-Executive-Summary)  
   
-[Table of Contents](#Table-of-Contents)  
+[3.0 - Table of Contents](#3.0-Table-of-Contents)  
   
-[Data Dictionary and Glossary](#Data-Dictionary-and-Glossary)  
-[Glossary and Definitions](#Glossary-and-Definitions)  
-[Data Dictionary](#Data-Dictionary)  
+[4.0 - Data Dictionary & Glossary](#4.0-Data-Dictionary-and-Glossary)  
+   - [4.1 - Data Dictionary](#4.1-Data-Dictionary)  
+   - [4.2 - Glossary of Terms](#4.2-Glossary-of-Terms)  
   
-[Imports and Cleaning](#Imports-and-Cleaning)  
-[Module Import](#Module-Import)  
-[Data Import & Cleaning](#Data-Import-&-Cleaning)  
-[Data Preparation](#Data-Preparation)  
+[5.0 - Import Steam Behavior Dataset](#5.0-Import-and-Clean-Steam-User-Behavior-Dataset)  
+   - [5.1 - Module Import](#5.1-Import-Modules-and-Libraries)  
+   - [5.2 - Import & Clean Data](#5.2-Import-Steam-Behavior-Data)  
   
-[EDA](#EDA)  
-[Generate "Common Words" Function](#Generate-"Common-Words"-Function)  
-[Determining Keywords for Analysis](#Determining-Keywords-for-Analysis)  
-[Possible Data Imbalance](#Possible-Data-Imbalance)  
+[6.0 - Import Metacritic Scores Dataset](#6.0-Import-and-Clean-Metacritic-Dataset)  
   
-[Model Generation and Selection](#Model-Generation-and-Selection)  
-[Creating the X and y Variables](#Creating-the-X-and-y-Variables)  
-[Baseline Model](#Baseline-Model)  
-[Logistic Regression Models](#Logistic-Regression-Models)  
-[Naive Bayes Models](#Naive-Bayes-Models)  
-[Model Selection](#Model-Selection)  
+[7.0 - Merge All Data](#7.0-Import-and-Combine-All-Data-to-Final-Dataframe)  
+   - [7.1 - Re-Import Imputed Data](#7.1-Re-import-Score-Data)  
+   - [7.2 - Join Behavior & Score Datasets](#7.2-Join-Behavior-and-Score-Datasets)  
   
-[Model Evaluation](#Model-Evaluation)  
+[8.0 - Generate Training & Holdout Sets](#8.0-Generate-Training-and-Holdout-Datasets)  
   
-[Conclusions](#Conclusions)  
+[9.0 - EDA](#9.0-EDA)  
+   - [9.1 - Study of Maximum- & Minimum-Scoring Titles](#9.1-Study-of-Maximum--and-Minimum-Scoring-Titles)  
+   - [9.2 - Study of Data Distribution & Relationships](#9.2-Study-of-Data-Distribution-and-Relationships)  
   
-[References](#References)
+[10.0 - Modeling](#10.0-Modeling)  
+   - [10.1 - Defining X and y](#10.1-Defining-X-and-y)  
+   - [10.2 - Baseline Model - Dummy Regressor](#10.2-Baseline-Model---Dummy-Regressor)  
+   - [10.3 - Linear Regressor](#10.3-Linear-Regressor)  
+   - [10.4 - AdaBoost Regressor](#10.4-AdaBoost-Regressor)  
+   - [10.5 - GradientBoost Regressor](#10.5-GradientBoost-Regressor)  
+   - [10.6 - Random Forest](#10.6-Random-Forest-Regressor)  
+  
+[11.0 - Model Selection](#11.0-Model-Selection)  
+  
+[12.0 - Model Evaluation & Results](#12.0-Model-Evaluation-and-Results)  
+   - [12.1 - Prepping Holdout Set & Getting Predictions](#12.1-Prepping-the-Holdout-Set-and-Getting-Predictions)
+   - [12.2 - Inserting Predictions Back into Dataframe](#12.2-Inserting-Predictions-Back-into-Dataframe)  
+   - [12.3 - Plotting Predictions Against Training Values](#12.3-Plotting-Predictions-Against-Training-Values)  
+  
+[13.0 - Conclusions](#13.0-Conclusions)  
+  
+[14.0 - References](#14.0-References)
 ---
 
 ### Dataset
