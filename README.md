@@ -26,44 +26,11 @@ Overall, I would not consider my model a successful tool for real-world deployme
   
 [Table of Contents](#Table-of-Contents)  
   
-[4.0 - Data Dictionary & Glossary](#4.0-Data-Dictionary-and-Glossary)  
-   - [4.1 - Data Dictionary](#4.1-Data-Dictionary)  
-   - [4.2 - Glossary of Terms](#4.2-Glossary-of-Terms)  
+[Data Dictionary](#Data-Dictionary)  
   
-[5.0 - Import Steam Behavior Dataset](#5.0-Import-and-Clean-Steam-User-Behavior-Dataset)  
-   - [5.1 - Module Import](#5.1-Import-Modules-and-Libraries)  
-   - [5.2 - Import & Clean Data](#5.2-Import-Steam-Behavior-Data)  
+[Datasets](#Datasets)
   
-[6.0 - Import Metacritic Scores Dataset](#6.0-Import-and-Clean-Metacritic-Dataset)  
-  
-[7.0 - Merge All Data](#7.0-Import-and-Combine-All-Data-to-Final-Dataframe)  
-   - [7.1 - Re-Import Imputed Data](#7.1-Re-import-Score-Data)  
-   - [7.2 - Join Behavior & Score Datasets](#7.2-Join-Behavior-and-Score-Datasets)  
-  
-[8.0 - Generate Training & Holdout Sets](#8.0-Generate-Training-and-Holdout-Datasets)  
-  
-[9.0 - EDA](#9.0-EDA)  
-   - [9.1 - Study of Maximum- & Minimum-Scoring Titles](#9.1-Study-of-Maximum--and-Minimum-Scoring-Titles)  
-   - [9.2 - Study of Data Distribution & Relationships](#9.2-Study-of-Data-Distribution-and-Relationships)  
-  
-[10.0 - Modeling](#10.0-Modeling)  
-   - [10.1 - Defining X and y](#10.1-Defining-X-and-y)  
-   - [10.2 - Baseline Model - Dummy Regressor](#10.2-Baseline-Model---Dummy-Regressor)  
-   - [10.3 - Linear Regressor](#10.3-Linear-Regressor)  
-   - [10.4 - AdaBoost Regressor](#10.4-AdaBoost-Regressor)  
-   - [10.5 - GradientBoost Regressor](#10.5-GradientBoost-Regressor)  
-   - [10.6 - Random Forest](#10.6-Random-Forest-Regressor)  
-  
-[11.0 - Model Selection](#11.0-Model-Selection)  
-  
-[12.0 - Model Evaluation & Results](#12.0-Model-Evaluation-and-Results)  
-   - [12.1 - Prepping Holdout Set & Getting Predictions](#12.1-Prepping-the-Holdout-Set-and-Getting-Predictions)
-   - [12.2 - Inserting Predictions Back into Dataframe](#12.2-Inserting-Predictions-Back-into-Dataframe)  
-   - [12.3 - Plotting Predictions Against Training Values](#12.3-Plotting-Predictions-Against-Training-Values)  
-  
-[13.0 - Conclusions](#13.0-Conclusions)  
-  
-[14.0 - References](#14.0-References)
+[References](#References)
 ---
 
 ### Data Dictionary  
@@ -79,6 +46,9 @@ Overall, I would not consider my model a successful tool for real-world deployme
 | meta_meta | float | The metascore and userscore multiplied together. This value was added to create additional weight to these metrics and improve model prediction accuracy. |  
 | played_dummy | integer | A binary value indicating if a playtime was available for the given game. Created to add additional weight to the hours_played column, owing to its low correlation. |
   
+### Datasets  
+  
+   -
 ### References  
 A tremendous thanks to SteamDB developers xPaw and Marlamin, who helped me verify to confirm my app_ids matched their respective titles and scores. Additionally a huge thanks to SteamSpy developer Sergey Galyonkin, who kindly offered to help me automate data collection from his system, but didn't have the capacity to do it within the Capstone window.  
   
