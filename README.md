@@ -7,7 +7,7 @@ Steam is the largest video game digital distribution platform in the world, with
   
 Steam user reviews carry the most weight on the site. They are the first review shown, in a search they get their own unique icon, and only the user score is shown in the thumbnail preview on Steam's front page. Because of the weight given to User Reviews, a game's sales can be made or broken by the score given to it.  
   
-We at Catalyst Consulting, as part of our full-spectrum services to developers and publishers, want to provide prediction services using a regression model for user reviews. Based on a game's metacritic scores, an aggregate value of professional reviewers' opinions, we will predict Steam user scores, allowing developers to appropriately budget for advertising and predict revenue models. Our measure of accuracy will be RMSE value.  
+We at Catalyst Consulting, as part of our full-spectrum services to developers and publishers, want to provide prediction services using a regression model for user reviews. Based on a game's metacritic scores, an aggregate value of professional reviewers' opinions, we will predict Steam user scores, allowing developers to appropriately budget for advertising and predict revenue models. Our metric of success will be RMSE.  
   
 We will not be trying to account for scandal though: an otherwise excellent game with a high Metacritic score can have a terrible User Review score due to game scandals, as users "review bomb" the user score section with negative reviews and rants about the developer.
 
@@ -20,12 +20,11 @@ Overall, I would not consider my model a successful tool for real-world deployme
 
 
 ### Table of Contents
-## 3.0 Table of Contents
-[1.0 - Problem Statement](#1.0-Problem-Statement)  
+[Problem Statement](#Problem-Statement)  
   
-[2.0 - Executive Summary](#2.0-Executive-Summary)  
+[Executive Summary](#Executive-Summary)  
   
-[3.0 - Table of Contents](#3.0-Table-of-Contents)  
+[Table of Contents](#Table-of-Contents)  
   
 [4.0 - Data Dictionary & Glossary](#4.0-Data-Dictionary-and-Glossary)  
    - [4.1 - Data Dictionary](#4.1-Data-Dictionary)  
@@ -67,5 +66,33 @@ Overall, I would not consider my model a successful tool for real-world deployme
 [14.0 - References](#14.0-References)
 ---
 
-### Dataset
+### Data Dictionary  
+| Data Name | Data Type | Description |  
+|---|---|---|  
+| metascore | integer | The aggregate professional review score on Metacritic. |  
+| name | object | The title of the given game. |  
+| console | object | The platform the game is designed for (this value is always PC). |  
+| userscore | float | The aggregate review score of semi-professional and normal players on Metacritic. |  
+| release_date | datetime | The release date of the given game. |  
+| review_percent_score | float | The second of two scoring metrics on Steam's back end. |  
+| hours_played | float | The average time played by users. This value is 0 if the game wasn't included in the Hours Played dataset, else it is the average of all listed hours played for that title. |  
+| meta_meta | float | The metascore and userscore multiplied together. This value was added to create additional weight to these metrics and improve model prediction accuracy. |  
+| played_dummy | integer | A binary value indicating if a playtime was available for the given game. Created to add additional weight to the hours_played column, owing to its low correlation. |
+  
+### References  
+A tremendous thanks to SteamDB developers xPaw and Marlamin, who helped me verify to confirm my app_ids matched their respective titles and scores. Additionally a huge thanks to SteamSpy developer Sergey Galyonkin, who kindly offered to help me automate data collection from his system, but didn't have the capacity to do it within the Capstone window.  
+  
+Additionally, a huge thanks to Steam users HendrickFalcon, Pyromancer, Najas, Lokeet, Milktea9, Spragoon, Chaella, Garflow, Prevengineer, Kyathil, AtlasBurden, DrunkPak, Citizen Khaelis, Chaunsay, Overdrive9, Runman, and Hexadrine. Their participation in my study and insight about user experience, rating games, "hours played", and in Pyromancer's case, the back end of Steam's system, were invaluable in helping select features when initially data collecting.  
+  
+Lastly, thank you to Dr. John Abel, whose experience with plotting data using matplotlib was invaluable when concepting visuals and playing with visual parameters for impact, as well as answering lots of questions about debugging graphs.  
+
+**Outside Sources:**  
+1) https://www.gamasutra.com/view/news/112269/Analysis_Valves_Lifetime_Retail_Sales_For_HalfLife_CounterStrike_Franchises.php  
+2) https://en.wikipedia.org/wiki/List_of_best-selling_PC_games#cite_note-8  
+3) https://en.wikipedia.org/wiki/World_of_Warcraft#:~:text=World%20of%20Warcraft%20was%20the,game%20franchises%20of%20all%20time  
+4) https://en.wikipedia.org/wiki/Call_of_Duty:_Black_Ops_III#Sales  
+5) https://en.wikipedia.org/wiki/Steam_(service)#:~:text=The%20Steam%20platform%20is%20the,of%20global%20PC%20game%20sales  
+6) https://www.statista.com/statistics/321374/global-all-time-unit-sales-call-of-duty-games/#:~:text=One%20of%20its%20successors%2C%20Call,copies%20as%20of%20January%202020.  
+7) https://www.kaggle.com/tamber/steam-video-games  
+8) https://www.kaggle.com/destring/metacritic-reviewed-games-since-2000
 
