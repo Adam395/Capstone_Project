@@ -30,9 +30,8 @@ Overall, I would not consider my model a successful tool for real-world deployme
   
 [Datasets](#Datasets)
   
-[References](#References)
----
-
+[References](#References)  
+  
 ### Data Dictionary  
 | Data Name | Data Type | Description |  
 |---|---|---|  
@@ -48,9 +47,9 @@ Overall, I would not consider my model a successful tool for real-world deployme
   
 ### Datasets  
   
--**result.csv:** A dataset consisting of video games on multiple platforms and their associated Metacritic reviews.  
--**steam-200k.csv:** A dataset consisting of 199,999 random Steam platform users and their behaviors, such as purchasing a game, playing a game, and the associated amount of time they performed that action.
--**df_for_data.csv:** A proprietary dataset consisting of the result.csv dataset with three additional columns added for Steam app_id (a game's unique identification value), Steam user score, and Steam user percent score.  
+   -**result.csv:** A dataset consisting of video games on multiple platforms and their associated Metacritic reviews.  
+   -**steam-200k.csv:** A dataset consisting of 199,999 random Steam platform users and their behaviors, such as purchasing a game, playing a game, and the associated amount of time they performed that action.  
+   -**df_for_data.csv:** A proprietary dataset consisting of the result.csv dataset with three additional columns added for Steam app_id (a game's unique identification value), Steam user score, and Steam user percent score.  
    
 ### References  
 A tremendous thanks to SteamDB developers xPaw and Marlamin, who helped me verify to confirm my app_ids matched their respective titles and scores. Additionally a huge thanks to SteamSpy developer Sergey Galyonkin, who kindly offered to help me automate data collection from his system, but didn't have the capacity to do it within the Capstone window.  
